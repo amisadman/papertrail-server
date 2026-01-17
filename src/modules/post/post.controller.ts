@@ -10,7 +10,16 @@ const createPost = async (req: Request, res: Response) => {
     return sendResponse(res, 404, false, error);
   }
 };
+const getAllPost = async (req: Request, res: Response) => {
+  try {
+    const result = await postService.getAllPost();
+    return sendResponse(res, 200, true, "Data Fetched Successfully", result);
+  } catch (error: any) {
+    return sendResponse(res, 404, false, error);
+  }
+};
 
 export const postController = {
   createPost,
+  getAllPost,
 };
