@@ -44,4 +44,12 @@ export const auth = betterAuth({
       }
     },
   },
+  socialProviders: {
+    google: {
+      prompt: "select_account consent",
+      accessType: "offline",
+      clientId: config.googleClientID as string,
+      clientSecret: config.googleClientSecret as string,
+    },
+  },
 });
