@@ -5,11 +5,18 @@ import morgan from "morgan";
 import { accessLogStream } from "./middleware/logger";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
+import cors from "cors";
+import { config } from "./config/config";
 
 const app: Application = express();
 app.use(express.json());
 app.use(morgan("combined", { stream: accessLogStream }));
-
+app.use(
+  cors({
+    origin: config.appUrl,
+    credentials: true,
+  }),
+);
 //better auth
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
