@@ -16,15 +16,7 @@
 - **Type Safety**: Fully written in TypeScript with Prisma for end-to-end type safety.
 - **Email Integration**: Integrated with Nodemailer for system notifications.
 
-## Tech Stack
-
-- **Runtime**: [Node.js](https://nodejs.org/)
-- **Framework**: [Express.js](https://expressjs.com/)
-- **ORM**: [Prisma](https://www.prisma.io/)
-- **Database**: [PostgreSQL](https://www.postgresql.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Auth**: [Better-Auth](https://better-auth.com/)
-- **Logging**: [Morgan](https://github.com/expressjs/morgan)
+---
 
 ## Database Design
 
@@ -104,6 +96,20 @@ erDiagram
     }
 ```
 
+---
+
+
+## Tech Stack
+
+- **Runtime**: [Node.js](https://nodejs.org/)
+- **Framework**: [Express.js](https://expressjs.com/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Auth**: [Better-Auth](https://better-auth.com/)
+- **Logging**: [Morgan](https://github.com/expressjs/morgan)
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -116,7 +122,7 @@ erDiagram
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/amisadman/papertrail-server.git
    cd papertrail-server
    ```
 
