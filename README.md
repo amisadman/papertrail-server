@@ -18,6 +18,14 @@
 
 ---
 
+## Client Repository
+
+The frontend client for this project is available at:
+[https://github.com/amisadman/papertrail-client](https://github.com/amisadman/papertrail-client)
+
+
+---
+
 ## Database Design
 
 Below is the Entity-Relationship Diagram (ERD) representing the database structure:
