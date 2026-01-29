@@ -15,6 +15,7 @@ router.get(
   postController.getMyPosts,
 );
 router.get("/:id", postController.getPostById);
+router.get("/stats", access(UserRole.ADMIN), postController.getStats);
 
 router.patch(
   "/:postId",
