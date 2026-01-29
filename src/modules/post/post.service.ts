@@ -1,3 +1,4 @@
+import { User } from "better-auth/types";
 import {
   CommentStatus,
   post,
@@ -184,8 +185,109 @@ const getPostById = async (postId: string) => {
   });
 };
 
+const getMyPosts = async (id: string) => {
+  try {
+    const result = await prisma.post.findMany({
+      where: {
+        authorId: id,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const count = await prisma.post.aggregate({
+      where: {
+        authorId: id,
+      },
+      _count: {
+        id: true,
+      },
+    });
+
+    return {
+      data: result,
+      total: count,
+    };
+  } catch (error: any) {
+    console.log("UWU");
+    throw new Error(error);
+  }
+};
+
+const updateMyPost = async (
+  postId: string,
+  authorId: string,
+  isAdmin: boolean,
+
+  payload: Partial<post>,
+) => {
+  try {
+    const valid = await prisma.post.findUniqueOrThrow({
+      where: {
+        id: postId,
+      },
+      select: {
+        id: true,
+        authorId: true,
+      },
+    });
+
+    if (!isAdmin && valid.authorId !== authorId) {
+      throw new Error("You are not the author");
+    }
+
+    if (!isAdmin) {
+      delete payload.isFeatured;
+    }
+
+    const result = await prisma.post.update({
+      where: {
+        id: valid.id,
+      },
+      data: payload,
+    });
+
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+const deletePost = async (
+  postId: string,
+  authorId: string,
+  isAdmin: boolean,
+) => {
+  try {
+    const valid = await prisma.post.findUniqueOrThrow({
+      where: {
+        id: postId,
+      },
+      select: {
+        id: true,
+        authorId: true,
+      },
+    });
+
+    if (!isAdmin && valid.authorId !== authorId) {
+      throw new Error("You are not the author");
+    }
+
+    const result = await prisma.post.delete({
+      where: {
+        id: valid.id,
+      },
+    });
+
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const postService = {
   createPost,
   getAllPost,
   getPostById,
+  getMyPosts,
+  updateMyPost,
+  deletePost
 };
